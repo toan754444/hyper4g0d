@@ -1,1 +1,302 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>KHỔNG TRƯỜNG | Đào tạo Dame Unlock</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Poppins', 'Segoe UI', 'Inter', system-ui, -apple-system, sans-serif;
+            padding: 20px;
+        }
+
+        /* KHUNG CHÍNH TỶ LỆ 9:16 */
+        .frame-9x16 {
+            width: 100%;
+            max-width: 405px;    /* 9:16 với chiều rộng 405px -> cao 720px */
+            aspect-ratio: 9 / 16;
+            background: linear-gradient(145deg, #0c0c0c 0%, #050505 100%);
+            border-radius: 48px;
+            position: relative;
+            overflow-y: auto;
+            overflow-x: hidden;
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(255, 40, 40, 0.2), 0 0 0 6px #0f0f0f;
+        }
+
+        /* CUSTOM SCROLL (vẫn giữ thẩm mỹ) */
+        .frame-9x16::-webkit-scrollbar {
+            width: 3px;
+        }
+        .frame-9x16::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        .frame-9x16::-webkit-scrollbar-thumb {
+            background: #e11d1d;
+        }
+
+        /* NỘI DUNG CUỘN */
+        .content {
+            padding: 28px 20px 40px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        /* TRICKER TAG TRÊN CÙNG */
+        .tricker-tag {
+            text-align: center;
+            font-size: 11px;
+            letter-spacing: 2.5px;
+            font-weight: 600;
+            color: #e11d1d;
+            background: rgba(225, 29, 29, 0.12);
+            display: inline-block;
+            width: fit-content;
+            margin: 0 auto;
+            padding: 6px 18px;
+            border-radius: 40px;
+            backdrop-filter: blur(2px);
+            text-transform: uppercase;
+            border: 0.5px solid rgba(225, 29, 29, 0.4);
+        }
+
+        /* LOGO KHỔNG TRƯỜNG TO - RÕ NÉT */
+        .logo-wrapper {
+            text-align: center;
+            margin: 8px 0 4px 0;
+        }
+        .main-logo {
+            font-size: 52px;
+            font-weight: 900;
+            letter-spacing: 6px;
+            font-family: 'Impact', 'Bebas Neue', 'Anton', sans-serif;
+            background: linear-gradient(130deg, #FFFFFF 20%, #ff3a3a 80%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 12px rgba(255, 0, 0, 0.6);
+            line-height: 1.1;
+            word-break: keep-all;
+        }
+        .logo-sub {
+            font-size: 9px;
+            letter-spacing: 3px;
+            color: #a0a0a0;
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        /* SLOT HOT */
+        .slot-hot {
+            background: rgba(225, 29, 29, 0.18);
+            border-left: 4px solid #e11d1d;
+            border-right: 4px solid #e11d1d;
+            padding: 12px 8px;
+            text-align: center;
+            border-radius: 28px;
+            margin: 8px 0;
+        }
+        .slot-hot p {
+            font-weight: 800;
+            font-size: 18px;
+            color: #fff;
+            line-height: 1.3;
+        }
+        .slot-hot span {
+            background: #e11d1d;
+            padding: 2px 12px;
+            border-radius: 50px;
+            font-size: 14px;
+            display: inline-block;
+            margin-top: 6px;
+        }
+
+        /* SECTION CHUNG */
+        .section {
+            margin-top: 4px;
+        }
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: -0.2px;
+            color: #e11d1d;
+            margin-bottom: 12px;
+            border-left: 3px solid #e11d1d;
+            padding-left: 12px;
+        }
+        .grid-badge {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+        .badge {
+            background: #141414;
+            border: 0.5px solid #2c2c2c;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #ddd;
+        }
+        .list-item {
+            font-size: 13.5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            color: #ececec;
+        }
+        .list-item strong {
+            color: #ff5e5e;
+        }
+        .tools-line {
+            background: #0b0b0b;
+            border-radius: 36px;
+            padding: 12px 12px;
+            text-align: center;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px dashed #e11d1d;
+            margin: 10px 0 6px;
+            color: #ffb7b7;
+            letter-spacing: 0.3px;
+        }
+        hr {
+            border: 0.5px solid #222;
+            margin: 8px 0;
+        }
+
+        /* CTA CUỐI */
+        .cta-box {
+            background: linear-gradient(95deg, #b01515, #e11d1d);
+            text-align: center;
+            padding: 16px 12px;
+            border-radius: 60px;
+            margin: 16px 0 8px;
+            font-weight: 800;
+            font-size: 16px;
+            color: white;
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+        }
+        .limit {
+            text-align: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: #ff9f9f;
+            background: rgba(0, 0, 0, 0.6);
+            width: fit-content;
+            margin: 8px auto 0;
+            padding: 4px 18px;
+            border-radius: 40px;
+        }
+        .footer-note {
+            text-align: center;
+            font-size: 9px;
+            color: #555;
+            margin-top: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Tinh chỉnh cho điện thoại */
+        @media (max-width: 450px) {
+            .content {
+                padding: 24px 16px 35px 16px;
+            }
+            .main-logo {
+                font-size: 44px;
+                letter-spacing: 4px;
+            }
+            .slot-hot p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="frame-9x16">
+    <div class="content">
+
+        <!-- TRICKER STYLE -->
+        <div style="text-align: center;">
+            <div class="tricker-tag">⚡ TRICKER STYLE · STREET TECH ⚡</div>
+        </div>
+
+        <!-- LOGO GIỮA KHỔNG TRƯỜNG TO ĐẬM -->
+        <div class="logo-wrapper">
+            <div class="main-logo">KHỔNG TRƯỜNG</div>
+            <div class="logo-sub">// ACADEMY //</div>
+        </div>
+
+        <!-- SLOT HOT -->
+        <div class="slot-hot">
+            <p>🔥 1/6 MỞ 5 SLOT HV DAME / UNLOCK<br>FB - TIKTOK - IG 🔥</p>
+            <span>⚠️ SIÊU GIỚI HẠN ⚠️</span>
+        </div>
+
+        <!-- ĐÀO TẠO CHUYÊN SÂU -->
+        <div class="section">
+            <div class="section-title">📌 ĐÀO TẠO CHUYÊN SÂU</div>
+            <div class="grid-badge">
+                <div class="badge">Dame tài khoản</div>
+                <div class="badge">Unlock / Unlink</div>
+                <div class="badge">Kháng checkpoint</div>
+                <div class="badge">Xử lý lỗi, limit, verify</div>
+                <div class="badge">FB · TikTok · IG</div>
+            </div>
+        </div>
+
+        <!-- QUYỀN LỢI HỌC VIÊN -->
+        <div class="section">
+            <div class="section-title">🎯 QUYỀN LỢI HỌC VIÊN</div>
+            <div class="list-item">✔️ Trực tiếp chỉ dạy từng bước chi tiết</div>
+            <div class="list-item">✔️ Bao hỗ trợ suốt quá trình học và làm</div>
+            <div class="list-item">✔️ Cấp sẵn tài nguyên hỗ trợ:</div>
+            <div class="tools-line">
+                🧰 Via · Tick · HMA · Tools cần thiết · Source hỗ trợ
+            </div>
+            <div class="list-item">✔️ Update tutorial (tut) liên tục</div>
+            <div class="list-item">✔️ Hướng dẫn thực chiến, cầm tay chỉ việc</div>
+            <div class="list-item">✔️ Hỗ trợ xử lý case thực tế khó</div>
+        </div>
+
+        <!-- PHÙ HỢP -->
+        <div class="section">
+            <div class="section-title">⚡ PHÙ HỢP</div>
+            <div class="grid-badge">
+                <div class="badge">👤 Người mới học nghề</div>
+                <div class="badge">💰 Kiếm thu nhập online</div>
+                <div class="badge">📈 Nâng cao skill account</div>
+            </div>
+        </div>
+
+        <!-- CALL TO ACTION + SLOT -->
+        <div class="cta-box">
+            📩 AI THẬT SỰ NGHIÊM TÚC → IB NHẬN SLOT
+        </div>
+        <div class="limit">
+            🚫 CHỈ 5 HỌC VIÊN DUY NHẤT 🚫
+        </div>
+
+        <div class="footer-note">
+            *Đào tạo thực chiến - Tricker Mentorship*
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
